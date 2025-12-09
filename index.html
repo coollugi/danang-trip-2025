@@ -151,11 +151,37 @@
               <div class="text-4xl font-bold flex items-center gap-3">
                 <span id="weather-temp">--</span>°C
                 <span id="weather-icon" class="text-2xl">⏳</span>
+                <span
+                  class="text-lg text-sky-100 font-normal ml-2 flex items-center"
+                  title="濕度"
+                >
+                  💧 <span id="weather-humidity">--</span>%
+                </span>
               </div>
-              <p class="mt-2 text-sky-100 text-sm" id="weather-desc">
+
+              <!-- Extra Stats: AQI & Rain -->
+              <div class="flex gap-4 mt-3 text-sm text-sky-100/90 font-medium">
+                <span class="flex items-center gap-1" title="空氣品質 (AQI)">
+                  🌫️ AQI: <span id="weather-aqi">--</span>
+                </span>
+                <span class="flex items-center gap-1" title="降雨機率">
+                  ☔ <span id="weather-rain">--</span>%
+                </span>
+              </div>
+
+              <p class="mt-4 text-sky-50 text-xs opacity-90" id="weather-desc">
                 正在載入峴港即時天氣...
               </p>
+
+              <!-- 7-Day Forecast (Condensed) -->
+              <div
+                id="weather-forecast"
+                class="mt-6 pt-4 border-t border-white/20 grid grid-cols-7 gap-1 text-center"
+              >
+                <!-- Forecast items will be injected here -->
+              </div>
             </div>
+
             <div class="absolute -right-6 -bottom-6 text-9xl opacity-10">
               🌧️
             </div>
@@ -163,7 +189,7 @@
 
           <!-- Guide Info Card -->
           <div
-            class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 relative"
+            class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 relative flex flex-col justify-between"
           >
             <div class="flex justify-between items-start">
               <div>
@@ -175,7 +201,7 @@
                 <h3 class="text-xl font-bold text-slate-800 mt-1">
                   Ho Dang An
                 </h3>
-                <p class="text-slate-500 text-sm">英文/越南文導遊</p>
+                <p class="text-slate-500 text-sm">中文/英文/越南文導遊</p>
               </div>
               <div class="bg-green-100 text-green-700 p-2 rounded-full">📞</div>
             </div>
@@ -195,7 +221,7 @@
 
           <!-- Flight Info -->
           <div
-            class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100"
+            class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 flex flex-col justify-between"
           >
             <div
               class="text-xs font-bold text-slate-400 uppercase tracking-wider"
@@ -223,10 +249,28 @@
                 <div class="text-xs text-slate-500">11:35</div>
               </div>
             </div>
-            <div
-              class="mt-4 bg-yellow-50 text-yellow-800 text-xs p-2 rounded border border-yellow-200"
-            >
-              🔔 回程: 12/19 BR384 (12:55 起飛)
+            <!-- Return Flight -->
+            <div class="border-t border-slate-100 my-3"></div>
+            <div class="flex justify-between items-center">
+              <div class="text-center">
+                <div class="text-2xl font-bold text-slate-800">DAD</div>
+                <div class="text-xs text-slate-500">12:55</div>
+              </div>
+              <div class="flex-1 px-4 text-center">
+                <div class="text-xs text-slate-400">BR384</div>
+                <div class="h-0.5 bg-slate-300 w-full my-3 relative">
+                  <div
+                    class="absolute -top-2 left-1/2 transform -translate-x-1/2 text-slate-400 bg-white px-1"
+                  >
+                    ✈️
+                  </div>
+                </div>
+                <div class="text-xs text-slate-500">2h 50m</div>
+              </div>
+              <div class="text-center">
+                <div class="text-2xl font-bold text-slate-800">TPE</div>
+                <div class="text-xs text-slate-500">16:45</div>
+              </div>
             </div>
           </div>
         </div>
@@ -313,7 +357,9 @@
                     包車 (Limosine Dcar 10座)
                   </td>
                   <td class="px-6 py-4">交通 (3天)</td>
-                  <td class="px-6 py-4 font-mono text-blue-600">7,900,000 VND</td>
+                  <td class="px-6 py-4 font-mono text-blue-600">
+                    7,900,000 VND
+                  </td>
                   <td class="px-6 py-4">含油資、過路費、保險</td>
                   <td class="px-6 py-4">
                     <span
@@ -583,7 +629,7 @@
               獲獎無數的精釀啤酒廠。頂樓座位可以看到龍橋，氣氛很Chill，不像夜店吵雜。
             </p>
             <a
-              href="https://goo.gl/maps/example"
+              href="https://www.google.com/maps/search/?api=1&query=7+Bridges+Brewing+Co+Danang"
               target="_blank"
               class="block mt-4 text-sm text-indigo-600 font-medium"
               >📍 查看地圖</a
@@ -612,7 +658,7 @@
               酒吧。調酒非常有創意（結合在地香料），爵士樂風格。
             </p>
             <a
-              href="https://goo.gl/maps/example"
+              href="https://www.google.com/maps/search/?api=1&query=Te+Bar+Danang"
               target="_blank"
               class="block mt-4 text-sm text-purple-600 font-medium"
               >📍 查看地圖</a
@@ -638,7 +684,7 @@
               D1 晚上已預訂。若其他天想再按，推薦這間的「藥草浴」，非常解疲勞。
             </p>
             <a
-              href="https://goo.gl/maps/example"
+              href="https://www.google.com/maps/search/?api=1&query=Golden+Lotus+Oriental+Organic+Spa+Danang"
               target="_blank"
               class="block mt-4 text-sm text-pink-600 font-medium"
               >📍 查看地圖</a
@@ -664,7 +710,7 @@
               如果不喝酒，搭船夜遊漢江是很好的選擇。可以看到龍橋變色，風很涼爽。
             </p>
             <a
-              href="https://goo.gl/maps/example"
+              href="https://www.google.com/maps/search/?api=1&query=Han+River+Cruise+Pier+Danang"
               target="_blank"
               class="block mt-4 text-sm text-blue-600 font-medium"
               >📍 查看地圖</a
@@ -692,7 +738,7 @@
               峴港最有名的甜品店。必點「榴槤泰式甜湯」或「焦糖布丁」，開到晚上10點多。
             </p>
             <a
-              href="https://goo.gl/maps/example"
+              href="https://www.google.com/maps/search/?api=1&query=Che+Lien+Danang"
               target="_blank"
               class="block mt-4 text-sm text-orange-600 font-medium"
               >📍 查看地圖</a
@@ -1501,31 +1547,82 @@
         const tempEl = document.getElementById("weather-temp");
         const iconEl = document.getElementById("weather-icon");
         const descEl = document.getElementById("weather-desc");
+        const humidityEl = document.getElementById("weather-humidity");
+        const aqiEl = document.getElementById("weather-aqi");
+        const rainEl = document.getElementById("weather-rain");
+        const forecastEl = document.getElementById("weather-forecast");
 
         try {
-          // Open-Meteo API for Da Nang (16.0544, 108.2022)
-          const res = await fetch(
-            "https://api.open-meteo.com/v1/forecast?latitude=16.0544&longitude=108.2022&current_weather=true&timezone=auto"
-          );
-          const data = await res.json();
+          // 1. Fetch Weather (Current + Daily Forecast)
+          const weatherUrl =
+            "https://api.open-meteo.com/v1/forecast?latitude=15.9942&longitude=108.2692&current=temperature_2m,relative_humidity_2m,weather_code&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=auto";
+          // 2. Fetch Air Quality
+          const aqiUrl =
+            "https://air-quality-api.open-meteo.com/v1/air-quality?latitude=15.9942&longitude=108.2692&current=us_aqi";
 
-          if (!data.current_weather) throw new Error("No weather data");
+          const [weatherRes, aqiRes] = await Promise.all([
+            fetch(weatherUrl),
+            fetch(aqiUrl),
+          ]);
 
-          const { temperature, weathercode } = data.current_weather;
-          const { icon, text } = getWeatherStatus(weathercode);
+          const weatherData = await weatherRes.json();
+          const aqiData = await aqiRes.json();
 
-          // Update DOM
-          tempEl.innerText = Math.round(temperature);
+          if (!weatherData.current || !aqiData.current)
+            throw new Error("No weather data");
+
+          // Destructure Data
+          const { temperature_2m, relative_humidity_2m, weather_code } =
+            weatherData.current;
+          const { us_aqi } = aqiData.current;
+          const {
+            weather_code: dailyCodes,
+            temperature_2m_max: dailyMax,
+            temperature_2m_min: dailyMin,
+            precipitation_probability_max: dailyRain,
+            time: dailyTime,
+          } = weatherData.daily;
+
+          const { icon, text } = getWeatherStatus(weather_code);
+
+          // Update Main Card
+          tempEl.innerText = Math.round(temperature_2m);
+          if (humidityEl) humidityEl.innerText = relative_humidity_2m;
+          if (aqiEl) aqiEl.innerText = us_aqi;
+          if (rainEl) rainEl.innerText = dailyRain[0]; // Today's Rain Prob
           iconEl.innerText = icon;
           descEl.innerText = `現在天氣：${text}。${getClothingAdvice(
-            temperature,
-            weathercode
+            temperature_2m,
+            weather_code
           )}`;
+
+          // Update 7-Day Forecast
+          let forecastHtml = "";
+          for (let i = 0; i < 7; i++) {
+            const isToday = i === 0;
+            const date = new Date(dailyTime[i]);
+            const dayName = isToday
+              ? "今天"
+              : date.toLocaleDateString("zh-TW", { weekday: "short" });
+            const dIcon = getWeatherStatus(dailyCodes[i]).icon;
+
+            // Minified simple view
+            forecastHtml += `
+                <div class="flex flex-col items-center ${
+                  isToday ? "bg-white/10 rounded-lg" : ""
+                }">
+                    <span class="text-[10px] text-sky-100 opacity-80">${dayName}</span>
+                    <span class="text-lg my-0.5 filter drop-shadow-sm">${dIcon}</span>
+                    <span class="text-xs font-bold">${Math.round(
+                      dailyMax[i]
+                    )}°</span>
+                </div>
+             `;
+          }
+          if (forecastEl) forecastEl.innerHTML = forecastHtml;
         } catch (e) {
           console.error("Weather Fetch Error:", e);
-          tempEl.innerText = "24";
-          iconEl.innerText = "🌦️";
-          descEl.innerText = "無法取得即時天氣，顯示季節平均數據。";
+          if (descEl) descEl.innerText = "無法取得完整天氣數據。";
         }
       }
 
