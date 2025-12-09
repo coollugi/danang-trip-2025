@@ -703,92 +703,13 @@
 
       <!-- SECTION: HOTEL (DETAILS) -->
       <section id="hotel" class="hidden fade-in space-y-6">
-        <h2 class="text-2xl font-bold text-slate-800">🏨 住宿詳情與設施</h2>
-        <div class="grid md:grid-cols-2 gap-6">
-          <!-- Hotel 1 -->
-          <div
-            class="bg-white border rounded-2xl p-6 hover:shadow-lg transition"
-          >
-            <div class="flex justify-between items-start mb-4">
-              <h3 class="font-bold text-xl text-slate-800">
-                凱悅 Hyatt Regency
-              </h3>
-              <span
-                class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full"
-                >Day 1-2</span
-              >
-            </div>
-            <ul class="text-sm space-y-3 text-slate-600">
-              <li class="flex gap-2">
-                <span>🏊‍♂️</span>
-                <span><b>設施：</b> 擁有峴港最大的泳池群與滑水道。</span>
-              </li>
-              <li class="flex gap-2">
-                <span>🏖️</span>
-                <span><b>沙灘：</b> 私人沙灘沙質很細，早上適合看日出。</span>
-              </li>
-              <li class="flex gap-2">
-                <span>🍳</span>
-                <span><b>早餐：</b> Green House 餐廳，越南河粉必吃。</span>
-              </li>
-              <li class="flex gap-2">
-                <span>👶</span>
-                <span
-                  ><b>小孩：</b> Camp Hyatt 兒童俱樂部活動很多
-                  (需付費/預約)。</span
-                >
-              </li>
-            </ul>
-            <a
-              href="https://www.google.com/maps/search/?api=1&query=Hyatt+Regency+Danang"
-              target="_blank"
-              class="mt-4 block w-full text-center bg-slate-50 text-slate-600 py-2 rounded hover:bg-slate-100 text-sm"
-              >📍 Google Maps</a
-            >
-          </div>
-          <!-- Hotel 2 -->
-          <div
-            class="bg-white border rounded-2xl p-6 hover:shadow-lg transition"
-          >
-            <div class="flex justify-between items-start mb-4">
-              <h3 class="font-bold text-xl text-slate-800">
-                萬豪 Marriott Resort
-              </h3>
-              <span
-                class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full"
-                >Day 3-4</span
-              >
-            </div>
-            <ul class="text-sm space-y-3 text-slate-600">
-              <li class="flex gap-2">
-                <span>🧘‍♀️</span>
-                <span
-                  ><b>氛圍：</b> 舊 Vinpearl
-                  改建，風格較為古典莊重，非常安靜。</span
-                >
-              </li>
-              <li class="flex gap-2">
-                <span>💆</span>
-                <span><b>SPA：</b> Quan Spa 是萬豪招牌，評價極高。</span>
-              </li>
-              <li class="flex gap-2">
-                <span>🌊</span>
-                <span><b>位置：</b> 靠近五行山，海浪通常比 Hyatt 大一點。</span>
-              </li>
-              <li class="flex gap-2">
-                <span>🍽️</span>
-                <span
-                  ><b>餐飲：</b> 自助晚餐海鮮種類多，若懶得出去吃很推薦。</span
-                >
-              </li>
-            </ul>
-            <a
-              href="https://www.google.com/maps/search/?api=1&query=Danang+Marriott+Resort+and+Spa"
-              target="_blank"
-              class="mt-4 block w-full text-center bg-slate-50 text-slate-600 py-2 rounded hover:bg-slate-100 text-sm"
-              >📍 Google Maps</a
-            >
-          </div>
+        <div class="flex items-center justify-between">
+          <h2 class="text-2xl font-bold text-slate-800">🏨 住宿詳情與設施</h2>
+          <span class="text-xs text-slate-500 italic">點擊卡片查看地圖</span>
+        </div>
+
+        <div id="hotel-container" class="grid md:grid-cols-2 gap-8">
+          <!-- Dynamic Content -->
         </div>
       </section>
     </main>
@@ -897,6 +818,44 @@
             desc: "很多網美打卡點，適合下午不想曬太陽時去。",
           },
         ],
+        hotel: [
+          {
+            name: "Hyatt Regency Resort",
+            days: "Day 1-3 (2 Nights)",
+            rating: 4.8,
+            description:
+              "五星級海濱度假村，擁有峴港最大的泳池群與滑水道，是親子旅遊的首選度假天堂。",
+            image: "/b.jpg",
+            features: [
+              { icon: "🏊‍♂️", text: "超級泳池群" },
+              { icon: "🏖️", text: "私人白沙灘" },
+              { icon: "👶", text: "Camp Hyatt" },
+              { icon: "🍳", text: "Green House 早餐" },
+            ],
+            links: {
+              maps: "https://www.google.com/maps/search/?api=1&query=Hyatt+Regency+Danang",
+            },
+            tags: ["Luxury", "Beachfront", "Family"],
+          },
+          {
+            name: "Marriott Resort & Spa",
+            days: "Day 3-5 (2 Nights)",
+            rating: 4.9,
+            description:
+              "原 Vinpearl 改建的法式殖民風格建築，氛圍古典莊重，無邊際泳池與靜謐海灘令人沉醉。",
+            image: "/a.jpg",
+            features: [
+              { icon: "🏰", text: "法式殖民風" },
+              { icon: "♾️", text: "無邊際泳池" },
+              { icon: "🧘‍♀️", text: "極致寧靜" },
+              { icon: "🚶", text: "近五行山" },
+            ],
+            links: {
+              maps: "https://www.google.com/maps/search/?api=1&query=Danang+Marriott+Resort+and+Spa",
+            },
+            tags: ["Classic", "Quiet", "Couples"],
+          },
+        ],
         days: [
           {
             day: 1,
@@ -994,7 +953,7 @@
               {
                 time: "16:30",
                 title: "抵達會安古鎮",
-                icon: "�",
+                icon: "🏮",
                 type: "travel",
                 desc: "下車點集合。會安是世界文化遺產，融合中、日、法式建築。",
                 location: "Hoi An",
@@ -1037,7 +996,7 @@
               {
                 time: "08:30",
                 title: "飯店早餐/出發",
-                icon: "�",
+                icon: "🏨",
                 type: "food",
                 desc: "飯店早餐後大廳集合 (飯店內)，前往南會安珍珠島。",
                 location: "Hyatt Regency",
@@ -1046,7 +1005,7 @@
               {
                 time: "09:30",
                 title: "抵達 VinWonders",
-                icon: "�",
+                icon: "🎡",
                 type: "fun",
                 desc: "南會安珍珠島，包含野生動物園 (River Safari)、水上樂園與民俗文化村。",
                 location: "VinWonders Nam Hoi An",
@@ -1212,6 +1171,7 @@
         renderDays(0);
         renderTimeline(0);
         renderFood();
+        renderHotel(); // New Hotel Render
         initChart();
         fetchWeather();
         updateCurrentActivity();
@@ -1410,22 +1370,94 @@
                             : ""
                         }
                     </div>
-                    <div class="flex gap-2 mb-3">
+                    <div class="flex flex-wrap gap-2 mb-3">
                         ${item.tags
                           .map(
                             (t) =>
-                              `<span class="text-xs bg-white border border-slate-200 px-2 py-1 rounded text-slate-500">${t}</span>`
+                              `<span class="text-xs px-2 py-1 bg-white border border-slate-200 text-slate-500 rounded-full">#${t}</span>`
                           )
                           .join("")}
                     </div>
-                    <p class="text-sm text-slate-600 mb-4">${item.desc}</p>
+                    <p class="text-sm text-slate-600 mb-4 line-clamp-2">${
+                      item.desc
+                    }</p>
                     <a href="https://www.google.com/maps/search/?api=1&query=${
                       item.link
-                    }" target="_blank" class="text-sky-600 text-sm font-medium hover:underline">📍 Google Maps</a>
+                    }" target="_blank" class="text-xs text-sky-600 font-bold hover:underline flex items-center gap-1">
+                        查看地圖 ↗
+                    </a>
                 </div>
-            `;
+                `;
       }
 
+      // --- HOTEL RENDERER (NEW) ---
+      function renderHotel() {
+        const hotelContainer = document.getElementById("hotel-container");
+        if (!hotelContainer) return;
+
+        const html = tripData.hotel
+          .map(
+            (h, index) => `
+            <div class="group relative rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500" data-aos="fade-up" data-aos-delay="${
+              index * 100
+            }">
+                <!-- Hero Image & Gradient -->
+                <div class="absolute inset-0 z-0">
+                    <img src="${h.image}" alt="${
+              h.name
+            }" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+                </div>
+
+                <!-- Content Overlay -->
+                <div class="relative z-10 p-8 pt-48 flex flex-col h-full justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-2">
+                             <div class="flex gap-2 mb-2">
+                                <span class="bg-white/20 backdrop-blur-md text-white text-xs font-bold px-3 py-1 rounded-full border border-white/30">${
+                                  h.days
+                                }</span>
+                                <span class="bg-yellow-400/90 text-yellow-900 text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1">★ ${
+                                  h.rating
+                                }</span>
+                             </div>
+                        </div>
+                        <h3 class="text-3xl font-bold text-white mb-2 leading-tight font-serif tracking-wide" style="text-shadow: 0 2px 4px rgba(0,0,0,0.3)">${
+                          h.name
+                        }</h3>
+                        <p class="text-slate-200 text-sm mb-6 max-w-lg leading-relaxed shadow-black drop-shadow-md">${
+                          h.description
+                        }</p>
+                        
+                        <!-- Features Grid -->
+                        <div class="grid grid-cols-2 gap-3 mb-6">
+                            ${h.features
+                              .map(
+                                (f) => `
+                                <div class="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-lg p-2 border border-white/10 hover:bg-white/20 transition">
+                                    <span class="text-xl filter drop-shadow-md">${f.icon}</span>
+                                    <span class="text-sm text-white font-medium">${f.text}</span>
+                                </div>
+                            `
+                              )
+                              .join("")}
+                        </div>
+                    </div>
+
+                    <!-- Action -->
+                    <a href="${
+                      h.links.maps
+                    }" target="_blank" class="inline-flex items-center justify-center gap-2 bg-white text-slate-900 font-bold py-3 px-6 rounded-full hover:bg-sky-50 transition w-full sm:w-auto shadow-lg">
+                        <span>📍 查看地圖位置</span>
+                    </a>
+                </div>
+            </div>
+        `
+          )
+          .join("");
+
+        hotelContainer.innerHTML = html;
+      }
       function getFilterLabel(k) {
         if (k === "local") return "在地";
         if (k === "cafe") return "咖啡";
