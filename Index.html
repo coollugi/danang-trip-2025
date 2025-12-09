@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2025 峴港家族遊 | 豪華規劃版 v2</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #f0f9ff; /* Sky 50 */
+            color: #334155; /* Slate 700 */
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #64748b; }
+
+        /* Chart Container */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 100%;
+            height: 300px;
+        }
+
+        .nav-active {
+            color: #0369a1; /* Sky 700 */
+            border-bottom: 2px solid #0369a1;
+            background-color: #e0f2fe;
+        }
+
+        .fade-in { animation: fadeIn 0.4s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Status Badges */
+        .badge-confirmed { background-color: #dcfce7; color: #166534; border: 1px solid #86efac; }
+        .badge-idea { background-color: #f1f5f9; color: #475569; border: 1px dashed #cbd5e1; }
+    </style>
+
+    <!-- Placeholder Comments -->
+    <!-- Chosen Palette: Sky Blue & Slate (Clean, Trustworthy) -->
+    <!-- Application Structure Plan: 
+         - Dashboard: Now includes Guide Info, Weather, and Quick Actions.
+         - Budget: New detailed table section differentiating Fixed vs Variable costs.
+         - Food/Spots: STRICTLY SEPARATED into "Reserved" (Top) and "Recommended" (Bottom) visual blocks.
+         - Nightlife: Expanded list for post-bedtime activities.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+</head>
+<body class="bg-slate-50 min-h-screen flex flex-col">
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center gap-2">
+                    <span class="text-2xl">🇻🇳</span>
+                    <div>
+                        <h1 class="text-lg font-bold text-slate-800 leading-tight">峴港家族行</h1>
+                        <p class="text-xs text-slate-500">12/15 - 12/19 (5天4夜)</p>
+                    </div>
+                </div>
+                <!-- Desktop Nav -->
+                <div class="hidden lg:flex space-x-1 items-center" id="desktop-nav">
+                    <!-- Injected via JS -->
+                </div>
+                <!-- Mobile Menu Button -->
+                <div class="flex items-center lg:hidden">
+                    <button id="mobile-menu-btn" class="p-2 rounded-md text-slate-600 hover:bg-slate-100 focus:outline-none">
+                        ☰ 選單
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Nav Panel -->
+        <div id="mobile-nav" class="hidden lg:hidden bg-white border-t border-gray-100 shadow-lg absolute w-full z-40">
+            <!-- Injected via JS -->
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 w-full space-y-8">
+
+        <!-- SECTION: ENHANCED DASHBOARD -->
+        <section id="dashboard" class="fade-in space-y-6">
+            
+            <!-- Hero Stats -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Weather Card -->
+                <div class="bg-gradient-to-br from-sky-500 to-blue-600 rounded-2xl p-6 text-white shadow-lg relative overflow-hidden">
+                    <div class="relative z-10">
+                        <div class="text-sky-100 text-sm font-medium mb-1">峴港當地天氣 (12月預測)</div>
+                        <div class="text-4xl font-bold flex items-center gap-3">
+                            24°C <span class="text-2xl">🌦️</span>
+                        </div>
+                        <p class="mt-2 text-sky-100 text-sm">雨季末期，偶有陣雨。早晚微涼 (20-25°C)，建議洋蔥式穿搭。</p>
+                    </div>
+                    <div class="absolute -right-6 -bottom-6 text-9xl opacity-10">🌧️</div>
+                </div>
+
+                <!-- Guide Info Card -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 relative">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <div class="text-xs font-bold text-slate-400 uppercase tracking-wider">當地導遊 (Guide)</div>
+                            <h3 class="text-xl font-bold text-slate-800 mt-1">Ho Dang An</h3>
+                            <p class="text-slate-500 text-sm">英文/越南文導遊</p>
+                        </div>
+                        <div class="bg-green-100 text-green-700 p-2 rounded-full">
+                            📞
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-slate-100">
+                        <div class="flex items-center gap-2 text-lg font-mono font-bold text-slate-700">
+                            034.6969.309
+                        </div>
+                        <a href="tel:0346969309" class="mt-2 block w-full text-center bg-green-600 text-white py-2 rounded-lg text-sm hover:bg-green-700 transition">撥打電話</a>
+                    </div>
+                </div>
+
+                <!-- Flight Info -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
+                    <div class="text-xs font-bold text-slate-400 uppercase tracking-wider">航班資訊 (長榮)</div>
+                    <div class="flex justify-between items-center mt-3">
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-slate-800">TPE</div>
+                            <div class="text-xs text-slate-500">09:45</div>
+                        </div>
+                        <div class="flex-1 px-4 text-center">
+                            <div class="text-xs text-slate-400">BR383</div>
+                            <div class="h-0.5 bg-slate-300 w-full my-1 relative">
+                                <div class="absolute -top-1.5 left-1/2 transform -translate-x-1/2 text-slate-400">✈️</div>
+                            </div>
+                            <div class="text-xs text-slate-500">2h 50m</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-slate-800">DAD</div>
+                            <div class="text-xs text-slate-500">11:35</div>
+                        </div>
+                    </div>
+                    <div class="mt-4 bg-yellow-50 text-yellow-800 text-xs p-2 rounded border border-yellow-200">
+                        🔔 回程: 12/19 BR384 (12:55 起飛)
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Warnings -->
+            <div class="bg-white rounded-xl shadow-sm border-l-4 border-red-500 p-4 flex items-start gap-4">
+                <div class="text-2xl">🚨</div>
+                <div>
+                    <h3 class="font-bold text-slate-800">緊急注意事項</h3>
+                    <ul class="text-sm text-slate-600 mt-1 space-y-1">
+                        <li>• <b>計程車詐騙：</b> 即使有包車，自由時間請務必用 Grab App，勿隨手攔車。</li>
+                        <li>• <b>換匯：</b> 韓市場金飾店匯率好，請「當面點清」。</li>
+                        <li>• <b>雨備：</b> 珍珠島有室內區，若遇大雨可調整行程順序。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: BUDGET (NEW) -->
+        <section id="budget" class="hidden fade-in space-y-6">
+            <div class="bg-white rounded-2xl shadow-sm p-6 border border-slate-100">
+                <h2 class="text-2xl font-bold text-slate-800 mb-2">💰 預算估算表</h2>
+                <p class="text-slate-500 text-sm mb-6">根據您的 CSV 資料整理的固定支出，加上依當地物價推算的變動支出。</p>
+
+                <!-- Summary Cards -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                    <div class="bg-slate-50 p-4 rounded-xl">
+                        <div class="text-xs text-slate-500">包車總計 (USD)</div>
+                        <div class="text-xl font-bold text-slate-800">$300</div>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-xl">
+                        <div class="text-xs text-slate-500">導遊/接送 (VND)</div>
+                        <div class="text-xl font-bold text-slate-800">4.4M ₫</div>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-xl">
+                        <div class="text-xs text-slate-500">預估餐費 (6大1小)</div>
+                        <div class="text-xl font-bold text-emerald-600">~12M ₫</div>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-xl">
+                        <div class="text-xs text-slate-500">人均預估 (不含機酒)</div>
+                        <div class="text-xl font-bold text-blue-600">~NT$ 5,000</div>
+                    </div>
+                </div>
+
+                <!-- Budget Table -->
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left text-slate-600">
+                        <thead class="text-xs text-slate-700 uppercase bg-slate-100">
+                            <tr>
+                                <th class="px-6 py-3 rounded-l-lg">項目</th>
+                                <th class="px-6 py-3">類別</th>
+                                <th class="px-6 py-3">費用 (原幣)</th>
+                                <th class="px-6 py-3">備註</th>
+                                <th class="px-6 py-3 rounded-r-lg">狀態</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100">
+                            <!-- Transport -->
+                            <tr class="bg-white">
+                                <td class="px-6 py-4 font-medium text-slate-900">包車 (Limosine Dcar 10座)</td>
+                                <td class="px-6 py-4">交通 (3天)</td>
+                                <td class="px-6 py-4 font-mono text-blue-600">$300 USD</td>
+                                <td class="px-6 py-4">含油資、過路費、保險</td>
+                                <td class="px-6 py-4"><span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-xs">待付</span></td>
+                            </tr>
+                            <tr class="bg-white">
+                                <td class="px-6 py-4 font-medium text-slate-900">機場接送 (Day 1 & 5)</td>
+                                <td class="px-6 py-4">交通</td>
+                                <td class="px-6 py-4 font-mono text-emerald-600">800,000 VND</td>
+                                <td class="px-6 py-4">兩趟總計</td>
+                                <td class="px-6 py-4"><span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-xs">待付</span></td>
+                            </tr>
+                            <tr class="bg-white">
+                                <td class="px-6 py-4 font-medium text-slate-900">中文導遊 (Ho Dang An)</td>
+                                <td class="px-6 py-4">服務 (3天)</td>
+                                <td class="px-6 py-4 font-mono text-emerald-600">3,600,000 VND</td>
+                                <td class="px-6 py-4">不含小費</td>
+                                <td class="px-6 py-4"><span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-xs">待付</span></td>
+                            </tr>
+                            <!-- Activities -->
+                            <tr class="bg-white">
+                                <td class="px-6 py-4 font-medium text-slate-900">珍珠島門票 (VinWonders)</td>
+                                <td class="px-6 py-4">門票</td>
+                                <td class="px-6 py-4 font-mono text-emerald-600">~600,000 VND/人</td>
+                                <td class="px-6 py-4">現場或網購，長輩可能有優待</td>
+                                <td class="px-6 py-4"><span class="bg-slate-100 text-slate-600 px-2 py-1 rounded text-xs">預估</span></td>
+                            </tr>
+                            <tr class="bg-white">
+                                <td class="px-6 py-4 font-medium text-slate-900">巴拿山門票</td>
+                                <td class="px-6 py-4">門票</td>
+                                <td class="px-6 py-4 font-mono text-emerald-600">~900,000 VND/人</td>
+                                <td class="px-6 py-4">含纜車與自助餐</td>
+                                <td class="px-6 py-4"><span class="bg-slate-100 text-slate-600 px-2 py-1 rounded text-xs">預估</span></td>
+                            </tr>
+                             <tr class="bg-white">
+                                <td class="px-6 py-4 font-medium text-slate-900">Golden Lotus Spa</td>
+                                <td class="px-6 py-4">按摩 (3人)</td>
+                                <td class="px-6 py-4 font-mono text-emerald-600">~450,000 VND/人</td>
+                                <td class="px-6 py-4">已預訂 21:30</td>
+                                <td class="px-6 py-4"><span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">已預訂</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Transport Analysis Chart (Kept per request) -->
+            <div class="bg-white rounded-2xl shadow-sm p-6 border border-slate-100">
+                <h3 class="font-bold text-lg text-slate-800 mb-4">交通成本效益分析</h3>
+                <div class="flex flex-col md:flex-row items-center gap-8">
+                    <div class="w-full md:w-1/2">
+                        <div class="chart-container">
+                            <canvas id="transportChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="w-full md:w-1/2 space-y-3">
+                        <p class="text-sm text-slate-600">雖然 Grab 單看較便宜，但考慮到我們有 <b>7人 (6大1小)</b>：</p>
+                        <ul class="list-disc ml-5 text-sm text-slate-600 space-y-1">
+                            <li>Grab 需要叫 <b>2台四人座</b> 或 <b>1台七人座</b> (很難叫)。</li>
+                            <li>巴拿山與珍珠島回程在尖峰時刻很難叫車，且有被喊價風險。</li>
+                            <li>包車提供「隨身保母車」功能，長輩小孩累了隨時可上車吹冷氣。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: ITINERARY (TIMELINE) -->
+        <section id="itinerary" class="hidden fade-in">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold text-slate-800">📅 每日行程</h2>
+                <div class="flex space-x-2 mt-4 md:mt-0 overflow-x-auto pb-2 w-full md:w-auto" id="day-tabs">
+                    <!-- Injected via JS -->
+                </div>
+            </div>
+            <div id="timeline-content" class="bg-white rounded-2xl shadow-sm p-6 border border-slate-100 min-h-[500px]">
+                <!-- Injected via JS -->
+            </div>
+        </section>
+
+        <!-- SECTION: FOOD & SPOTS (SPLIT) -->
+        <section id="food" class="hidden fade-in space-y-10">
+            
+            <!-- PART 1: CONFIRMED RESERVATIONS -->
+            <div class="relative">
+                <div class="absolute -left-2 top-0 bottom-0 w-1 bg-gradient-to-b from-yellow-400 to-yellow-600 rounded"></div>
+                <div class="pl-6">
+                    <h2 class="text-2xl font-bold text-slate-800 mb-2 flex items-center gap-2">
+                        <span>✅</span> 已確認預訂 (Confirmed)
+                    </h2>
+                    <p class="text-slate-500 mb-6">這些餐廳與活動已列在您的行程表中，請務必準時抵達。</p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="food-confirmed">
+                        <!-- Injected JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- PART 2: RECOMMENDATIONS -->
+            <div class="relative pt-8 border-t border-slate-200">
+                <div class="absolute -left-2 top-8 bottom-0 w-1 bg-gradient-to-b from-sky-400 to-blue-600 rounded"></div>
+                <div class="pl-6">
+                    <h2 class="text-2xl font-bold text-slate-800 mb-2 flex items-center gap-2">
+                        <span>✨</span> 探索推薦 (Explore)
+                    </h2>
+                    <p class="text-slate-500 mb-6">在地美食、咖啡廳與備案選擇。尚未預訂，可視當天情況安排。</p>
+                    
+                    <!-- Filters -->
+                    <div class="flex flex-wrap gap-2 mb-6" id="food-filters">
+                        <button class="px-4 py-1.5 rounded-full text-sm border border-slate-300 hover:bg-slate-50 bg-slate-800 text-white" onclick="filterFood('all')">全部</button>
+                        <button class="px-4 py-1.5 rounded-full text-sm border border-slate-300 hover:bg-slate-50" onclick="filterFood('local')">在地小吃</button>
+                        <button class="px-4 py-1.5 rounded-full text-sm border border-slate-300 hover:bg-slate-50" onclick="filterFood('cafe')">咖啡/甜點</button>
+                        <button class="px-4 py-1.5 rounded-full text-sm border border-slate-300 hover:bg-slate-50" onclick="filterFood('western')">西式/海鮮</button>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="food-ideas">
+                        <!-- Injected JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: NIGHTLIFE (NEW) -->
+        <section id="nightlife" class="hidden fade-in space-y-6">
+             <div class="bg-indigo-900 rounded-2xl p-8 text-white shadow-xl relative overflow-hidden">
+                <div class="relative z-10">
+                    <h2 class="text-3xl font-bold mb-4">🌙 爸媽放風地圖 (After 9 PM)</h2>
+                    <p class="text-indigo-200 max-w-2xl">
+                        小孩睡了之後，這座城市才剛醒來。我們為您挑選了適合大人放鬆、聊天、小酌的地方。
+                        <br>建議分批前往，或請一位大人留守飯店陪小孩。
+                    </p>
+                </div>
+                <div class="absolute right-0 bottom-0 opacity-20 text-9xl">🍸</div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <div class="bg-white rounded-xl shadow-sm border border-indigo-100 p-5 hover:shadow-md transition group">
+                    <div class="flex justify-between items-start">
+                        <div class="bg-indigo-100 text-indigo-700 p-2 rounded-lg text-2xl">🍺</div>
+                        <span class="text-xs bg-slate-100 px-2 py-1 rounded">車程 10min</span>
+                    </div>
+                    <h3 class="font-bold text-lg text-slate-800 mt-3 group-hover:text-indigo-600">7 Bridges Brewing Co.</h3>
+                    <p class="text-sm text-slate-500 mt-2">獲獎無數的精釀啤酒廠。頂樓座位可以看到龍橋，氣氛很Chill，不像夜店吵雜。</p>
+                    <a href="https://goo.gl/maps/example" target="_blank" class="block mt-4 text-sm text-indigo-600 font-medium">📍 查看地圖</a>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-white rounded-xl shadow-sm border border-indigo-100 p-5 hover:shadow-md transition group">
+                    <div class="flex justify-between items-start">
+                        <div class="bg-purple-100 text-purple-700 p-2 rounded-lg text-2xl">🍸</div>
+                        <span class="text-xs bg-slate-100 px-2 py-1 rounded">市區</span>
+                    </div>
+                    <h3 class="font-bold text-lg text-slate-800 mt-3 group-hover:text-purple-600">Tê Bar</h3>
+                    <p class="text-sm text-slate-500 mt-2">峴港排名第一的 Speakeasy 酒吧。調酒非常有創意（結合在地香料），爵士樂風格。</p>
+                    <a href="https://goo.gl/maps/example" target="_blank" class="block mt-4 text-sm text-purple-600 font-medium">📍 查看地圖</a>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-white rounded-xl shadow-sm border border-indigo-100 p-5 hover:shadow-md transition group">
+                    <div class="flex justify-between items-start">
+                        <div class="bg-pink-100 text-pink-700 p-2 rounded-lg text-2xl">💆‍♀️</div>
+                        <span class="text-xs bg-slate-100 px-2 py-1 rounded">已預訂</span>
+                    </div>
+                    <h3 class="font-bold text-lg text-slate-800 mt-3 group-hover:text-pink-600">Golden Lotus Spa</h3>
+                    <p class="text-sm text-slate-500 mt-2">D1 晚上已預訂。若其他天想再按，推薦這間的「藥草浴」，非常解疲勞。</p>
+                    <a href="https://goo.gl/maps/example" target="_blank" class="block mt-4 text-sm text-pink-600 font-medium">📍 查看地圖</a>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="bg-white rounded-xl shadow-sm border border-indigo-100 p-5 hover:shadow-md transition group">
+                    <div class="flex justify-between items-start">
+                        <div class="bg-blue-100 text-blue-700 p-2 rounded-lg text-2xl">🚢</div>
+                        <span class="text-xs bg-slate-100 px-2 py-1 rounded">浪漫</span>
+                    </div>
+                    <h3 class="font-bold text-lg text-slate-800 mt-3 group-hover:text-blue-600">漢江遊船 (Han River Cruise)</h3>
+                    <p class="text-sm text-slate-500 mt-2">如果不喝酒，搭船夜遊漢江是很好的選擇。可以看到龍橋變色，風很涼爽。</p>
+                    <a href="https://goo.gl/maps/example" target="_blank" class="block mt-4 text-sm text-blue-600 font-medium">📍 查看地圖</a>
+                </div>
+
+                 <!-- Card 5 -->
+                 <div class="bg-white rounded-xl shadow-sm border border-indigo-100 p-5 hover:shadow-md transition group">
+                    <div class="flex justify-between items-start">
+                        <div class="bg-orange-100 text-orange-700 p-2 rounded-lg text-2xl">🥣</div>
+                        <span class="text-xs bg-slate-100 px-2 py-1 rounded">宵夜</span>
+                    </div>
+                    <h3 class="font-bold text-lg text-slate-800 mt-3 group-hover:text-orange-600">Chè Liên (道地甜品)</h3>
+                    <p class="text-sm text-slate-500 mt-2">峴港最有名的甜品店。必點「榴槤泰式甜湯」或「焦糖布丁」，開到晚上10點多。</p>
+                    <a href="https://goo.gl/maps/example" target="_blank" class="block mt-4 text-sm text-orange-600 font-medium">📍 查看地圖</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: HOTEL (DETAILS) -->
+        <section id="hotel" class="hidden fade-in space-y-6">
+            <h2 class="text-2xl font-bold text-slate-800">🏨 住宿詳情與設施</h2>
+             <div class="grid md:grid-cols-2 gap-6">
+                <!-- Hotel 1 -->
+                <div class="bg-white border rounded-2xl p-6 hover:shadow-lg transition">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="font-bold text-xl text-slate-800">凱悅 Hyatt Regency</h3>
+                        <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">Day 1-2</span>
+                    </div>
+                    <ul class="text-sm space-y-3 text-slate-600">
+                        <li class="flex gap-2"><span>🏊‍♂️</span> <span><b>設施：</b> 擁有峴港最大的泳池群與滑水道。</span></li>
+                        <li class="flex gap-2"><span>🏖️</span> <span><b>沙灘：</b> 私人沙灘沙質很細，早上適合看日出。</span></li>
+                        <li class="flex gap-2"><span>🍳</span> <span><b>早餐：</b> Green House 餐廳，越南河粉必吃。</span></li>
+                        <li class="flex gap-2"><span>👶</span> <span><b>小孩：</b> Camp Hyatt 兒童俱樂部活動很多 (需付費/預約)。</span></li>
+                    </ul>
+                     <a href="https://www.google.com/maps/search/?api=1&query=Hyatt+Regency+Danang" target="_blank" class="mt-4 block w-full text-center bg-slate-50 text-slate-600 py-2 rounded hover:bg-slate-100 text-sm">📍 Google Maps</a>
+                </div>
+                <!-- Hotel 2 -->
+                <div class="bg-white border rounded-2xl p-6 hover:shadow-lg transition">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="font-bold text-xl text-slate-800">萬豪 Marriott Resort</h3>
+                        <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">Day 3-4</span>
+                    </div>
+                    <ul class="text-sm space-y-3 text-slate-600">
+                        <li class="flex gap-2"><span>🧘‍♀️</span> <span><b>氛圍：</b> 舊 Vinpearl 改建，風格較為古典莊重，非常安靜。</span></li>
+                        <li class="flex gap-2"><span>💆</span> <span><b>SPA：</b> Quan Spa 是萬豪招牌，評價極高。</span></li>
+                        <li class="flex gap-2"><span>🌊</span> <span><b>位置：</b> 靠近五行山，海浪通常比 Hyatt 大一點。</span></li>
+                        <li class="flex gap-2"><span>🍽️</span> <span><b>餐飲：</b> 自助晚餐海鮮種類多，若懶得出去吃很推薦。</span></li>
+                    </ul>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Danang+Marriott+Resort+and+Spa" target="_blank" class="mt-4 block w-full text-center bg-slate-50 text-slate-600 py-2 rounded hover:bg-slate-100 text-sm">📍 Google Maps</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 mt-auto py-8 text-center text-slate-400 text-sm">
+        <p>© 2025 峴港家族旅遊 v2</p>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // --- DATA STORE ---
+        const tripData = {
+            nav: [
+                { id: 'dashboard', label: '總覽 Dashboard' },
+                { id: 'itinerary', label: '行程 Timeline' },
+                { id: 'budget', label: '預算 Budget' },
+                { id: 'food', label: '美食 Food' },
+                { id: 'nightlife', label: '夜生活 Night' },
+                { id: 'hotel', label: '住宿 Hotel' }
+            ],
+            // Combined Confirmed & Ideas into categorized lists
+            food: [
+                // Confirmed
+                { name: "Madam Lan", category: "confirmed", tags: ["越式", "Day1午餐"], link: "Madam+Lan", desc: "12/15 12:30 | 6人 | 像在古宅裡用餐，環境優雅。" },
+                { name: "The Temple", category: "confirmed", tags: ["會安", "Day2晚餐"], link: "The+Temple+Restaurant+Hoi+An", desc: "12/16 17:30 | 8人 | 位於會安，適合家族聚餐。" },
+                { name: "Thìa Gỗ", category: "confirmed", tags: ["家常菜", "Day4晚餐"], link: "Thia+Go+Restaurant+Da+Nang", desc: "12/18 晚餐 | 評價極高，溫馨的越式家庭料理。" },
+                
+                // Ideas - Local
+                { name: "Bánh Xèo Bà Dưỡng", category: "local", tags: ["必吃", "煎餅"], link: "Banh+Xeo+Ba+Duong", desc: "深巷裡的傳奇美食，只賣越南煎餅，沾醬是一絕。" },
+                { name: "Mì Quảng 1A", category: "local", tags: ["早餐", "廣南麵"], link: "Mi+Quang+1A", desc: "峴港特色麵食，口感像寬板條，配上酥脆米餅。" },
+                { name: "Bánh Mì Phượng", category: "local", tags: ["會安", "法國麵包"], link: "Banh+Mi+Phuong", desc: "號稱越南最好吃的法國麵包，位於會安古鎮。" },
+                { name: "Phở Bắc 63", category: "local", tags: ["河粉", "湯頭讚"], link: "Pho+Bac+63", desc: "在地人推薦的牛肉河粉，湯頭清甜。" },
+                { name: "Be Man Seafood", category: "western", tags: ["海鮮", "大排檔"], link: "Be+Man+Seafood", desc: "就在海邊，非常在地、吵雜、新鮮、便宜。自己挑海鮮。" },
+                
+                // Ideas - Western/Cafe
+                { name: "Pizza 4P's", category: "western", tags: ["義式", "超人氣"], link: "Pizza+4Ps+Indochina", desc: "務必提前預約。自製起司與螃蟹義大利麵非常強。" },
+                { name: "Cong Caphe", category: "cafe", tags: ["椰子咖啡", "連鎖"], link: "Cong+Caphe+Danang", desc: "必點椰子咖啡冰沙。共產黨軍綠風格裝潢。" },
+                { name: "Reply 1988 Cafe", category: "cafe", tags: ["韓系", "拍照"], link: "Reply+1988+Cafe", desc: "很多網美打卡點，適合下午不想曬太陽時去。" }
+            ],
+            days: [
+                 {
+                    day: 1, date: "12/15 (一)", title: "抵達 & 凱悅放鬆",
+                    events: [
+                        { time: "11:35", title: "抵達峴港 (BR383)", icon: "🛬", type: "travel" },
+                        { time: "12:30", title: "午餐：Madam Lan (已預訂)", icon: "🍜", type: "food" },
+                        { time: "14:30", title: "Check-in Hyatt", icon: "🏨", type: "hotel" },
+                        { time: "16:00", title: "沙灘/泳池放鬆", icon: "🏖️", type: "fun" },
+                        { time: "18:30", title: "晚餐：Pizza 4P's (建議預約)", icon: "🍕", type: "food" },
+                        { time: "21:30", title: "按摩：Golden Lotus (已預訂)", icon: "💆", type: "relax" }
+                    ]
+                },
+                {
+                    day: 2, date: "12/16 (二)", title: "會安古鎮漫遊",
+                    events: [
+                        { time: "09:00", title: "Camp Hyatt / 飯店早餐", icon: "🍳", type: "food" },
+                        { time: "15:30", title: "前往會安古鎮", icon: "🚗", type: "travel" },
+                        { time: "16:30", title: "古鎮遊船/放水燈", icon: "🏮", type: "fun" },
+                        { time: "17:30", title: "晚餐：The Temple (已預訂)", icon: "🍽️", type: "food" },
+                        { time: "20:15", title: "返回飯店", icon: "🚌", type: "travel" }
+                    ]
+                },
+                {
+                    day: 3, date: "12/17 (三)", title: "珍珠島樂園",
+                    events: [
+                        { time: "08:30", title: "前往 VinWonders", icon: "🎡", type: "fun" },
+                        { time: "12:00", title: "園區午餐", icon: "🍔", type: "food" },
+                        { time: "16:00", title: "移動至萬豪酒店", icon: "🚗", type: "travel" },
+                        { time: "18:30", title: "晚餐：Hải Sản Mộc Quán (推薦)", icon: "🦀", type: "food" }
+                    ]
+                },
+                {
+                    day: 4, date: "12/18 (四)", title: "巴拿山佛手橋",
+                    events: [
+                        { time: "08:30", title: "前往巴拿山", icon: "🚡", type: "fun" },
+                        { time: "10:00", title: "黃金佛手橋", icon: "🌉", type: "fun" },
+                        { time: "12:30", title: "自助午餐", icon: "🍴", type: "food" },
+                        { time: "18:30", title: "晚餐：Thìa Gỗ (已預訂)", icon: "🍲", type: "food" }
+                    ]
+                },
+                {
+                    day: 5, date: "12/19 (五)", title: "市區採買 & 返家",
+                    events: [
+                        { time: "09:00", title: "粉紅教堂", icon: "⛪", type: "fun" },
+                        { time: "10:00", title: "康市場/韓市場 採買", icon: "🛍️", type: "fun" },
+                        { time: "11:00", title: "前往機場", icon: "🚗", type: "travel" },
+                        { time: "12:55", title: "起飛 (BR384)", icon: "🛫", type: "travel" }
+                    ]
+                }
+            ]
+        };
+
+        // --- DOM ELEMENTS ---
+        const navDesktop = document.getElementById('desktop-nav');
+        const navMobile = document.getElementById('mobile-nav');
+        const dayTabs = document.getElementById('day-tabs');
+        const timelineContent = document.getElementById('timeline-content');
+        const foodConfirmed = document.getElementById('food-confirmed');
+        const foodIdeas = document.getElementById('food-ideas');
+
+        // --- INIT ---
+        function init() {
+            renderNav();
+            renderDays(0);
+            renderTimeline(0);
+            renderFood();
+            initChart();
+
+            document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+                navMobile.classList.toggle('hidden');
+            });
+        }
+
+        // --- NAV ---
+        function renderNav() {
+            tripData.nav.forEach(n => {
+                // Desktop
+                const dBtn = document.createElement('button');
+                dBtn.innerText = n.label;
+                dBtn.className = "px-4 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-sky-600 hover:bg-slate-50 transition nav-link";
+                dBtn.onclick = () => switchTab(n.id);
+                dBtn.dataset.target = n.id;
+                navDesktop.appendChild(dBtn);
+
+                // Mobile
+                const mBtn = document.createElement('button');
+                mBtn.innerText = n.label;
+                mBtn.className = "block w-full text-left px-6 py-3 border-b border-slate-50 text-slate-600 active:bg-slate-100";
+                mBtn.onclick = () => { switchTab(n.id); navMobile.classList.add('hidden'); };
+                navMobile.appendChild(mBtn);
+            });
+            // Set Dashboard Active
+            switchTab('dashboard');
+        }
+
+        function switchTab(id) {
+            document.querySelectorAll('main > section').forEach(s => s.classList.add('hidden'));
+            document.getElementById(id).classList.remove('hidden');
+            
+            document.querySelectorAll('.nav-link').forEach(b => {
+                if(b.dataset.target === id) b.classList.add('nav-active');
+                else b.classList.remove('nav-active');
+            });
+            window.scrollTo(0,0);
+        }
+
+        // --- TIMELINE ---
+        function renderDays(activeIdx) {
+            dayTabs.innerHTML = '';
+            tripData.days.forEach((d, i) => {
+                const btn = document.createElement('button');
+                btn.className = `whitespace-nowrap px-4 py-2 rounded-full text-sm font-bold transition flex-shrink-0 border ${i === activeIdx ? 'bg-sky-600 text-white border-sky-600' : 'bg-white text-slate-500 border-slate-200'}`;
+                btn.innerText = `Day ${d.day}`;
+                btn.onclick = () => { renderDays(i); renderTimeline(i); };
+                dayTabs.appendChild(btn);
+            });
+        }
+
+        function renderTimeline(idx) {
+            const day = tripData.days[idx];
+            let html = `
+                <div class="mb-6 border-b border-slate-100 pb-4">
+                    <h3 class="text-xl font-bold text-sky-800">${day.date} ${day.title}</h3>
+                </div>
+                <div class="relative border-l-2 border-slate-200 ml-3 space-y-8 my-4">
+            `;
+            
+            day.events.forEach(e => {
+                html += `
+                    <div class="relative pl-8">
+                        <div class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-white border-4 border-sky-400"></div>
+                        <span class="text-xs font-bold text-slate-400 bg-slate-100 px-2 py-0.5 rounded">${e.time}</span>
+                        <h4 class="text-lg font-bold text-slate-800 mt-1">${e.icon} ${e.title}</h4>
+                    </div>
+                `;
+            });
+            html += `</div>`;
+            timelineContent.innerHTML = html;
+        }
+
+        // --- FOOD ---
+        function renderFood(filter = 'all') {
+            // Render Confirmed (Static List)
+            if(filter === 'all' || filter === 'confirmed') {
+                const confirmed = tripData.food.filter(f => f.category === 'confirmed');
+                foodConfirmed.innerHTML = confirmed.map(f => createFoodCard(f, true)).join('');
+            } else {
+                 foodConfirmed.innerHTML = '<p class="col-span-3 text-center text-slate-400 italic">篩選模式下隱藏已預訂項目</p>';
+            }
+
+            // Render Ideas
+            const ideas = tripData.food.filter(f => f.category !== 'confirmed' && (filter === 'all' || f.category === filter));
+            foodIdeas.innerHTML = ideas.map(f => createFoodCard(f, false)).join('');
+
+            // Update Filter Buttons
+            document.querySelectorAll('#food-filters button').forEach(b => {
+                if(b.textContent.includes(getFilterLabel(filter))) {
+                    b.classList.add('bg-slate-800', 'text-white');
+                    b.classList.remove('bg-white', 'text-slate-600');
+                } else {
+                    b.classList.remove('bg-slate-800', 'text-white');
+                }
+            });
+        }
+
+        function createFoodCard(item, isConfirmed) {
+            const borderClass = isConfirmed ? 'border-yellow-400 border-l-4' : 'border-slate-200 border border-dashed';
+            const bgClass = isConfirmed ? 'bg-white' : 'bg-slate-50';
+            
+            return `
+                <div class="${bgClass} ${borderClass} rounded-xl p-5 shadow-sm hover:shadow-md transition">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="font-bold text-lg text-slate-800">${item.name}</h3>
+                        ${isConfirmed ? '<span class="text-xs font-bold bg-yellow-100 text-yellow-800 px-2 py-1 rounded">已預訂</span>' : ''}
+                    </div>
+                    <div class="flex gap-2 mb-3">
+                        ${item.tags.map(t => `<span class="text-xs bg-white border border-slate-200 px-2 py-1 rounded text-slate-500">${t}</span>`).join('')}
+                    </div>
+                    <p class="text-sm text-slate-600 mb-4">${item.desc}</p>
+                    <a href="https://www.google.com/maps/search/?api=1&query=${item.link}" target="_blank" class="text-sky-600 text-sm font-medium hover:underline">📍 Google Maps</a>
+                </div>
+            `;
+        }
+        
+        function getFilterLabel(k) {
+            if(k==='local') return '在地';
+            if(k==='cafe') return '咖啡';
+            if(k==='western') return '西式';
+            return '全部';
+        }
+
+        window.filterFood = renderFood;
+
+        // --- CHART ---
+        function initChart() {
+            const ctx = document.getElementById('transportChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['包車總費用 (1台大車)', 'Grab 預估 (需叫2台車)'],
+                    datasets: [{
+                        label: '費用 (USD)',
+                        data: [350, 320],
+                        backgroundColor: ['rgba(14, 165, 233, 0.8)', 'rgba(203, 213, 225, 0.5)'],
+                        borderColor: ['rgb(14, 165, 233)', 'rgb(203, 213, 225)'],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: { y: { beginAtZero: true } }
+                }
+            });
+        }
+
+        // START
+        window.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
